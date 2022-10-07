@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { is_mobile } from "../../CONSTANTS";
 
 type Props = {
     children: ReactElement;
@@ -6,7 +7,11 @@ type Props = {
 
 export default function AuthLayout({ children }: Props) {
     return (
-            <section className="form-page js-mouse-move-container">
+        <section
+            className="form-page js-mouse-move-container scroll-bar-1"
+            style={{ maxHeight: "100vh", overflowY: "scroll" }}
+        >
+            {!is_mobile && (
                 <div
                     className="form-page__img bg-dark-1"
                     style={{ paddingTop: "269px" }}
@@ -69,18 +74,32 @@ export default function AuthLayout({ children }: Props) {
                         </div>
                     </div>
                 </div>
+            )}
 
-                <div className="form-page__content lg:py-50 bg-yellow-light">
-                    <div className="container-fluid">
-                        <div className="row justify-center items-center">
-                            <div className="col-xl-7 col-lg-9 col-md-9">
-                                <div className="px-50 py-50 md:px-25 lg:py-25 bg-white shadow-1 rounded-16">
-                                    {children}
-                                </div>
+            {is_mobile && (
+                <>
+                    <br />
+                    <br />
+                </>
+            )}
+
+            <div className="form-page__content lg:py-50 bg-yellow-light">
+                <div className="container-fluid">
+                    <div className="row justify-center items-center">
+                        <div className="col-xl-7 col-lg-9 col-md-9">
+                            <div className="px-50 py-50 md:px-25 lg:py-25 bg-white shadow-1 rounded-16">
+                                {children}
                             </div>
                         </div>
                     </div>
+                    {is_mobile && (
+                        <>
+                            <br />
+                            <br />
+                        </>
+                    )}
                 </div>
-            </section>
+            </div>
+        </section>
     );
 }
