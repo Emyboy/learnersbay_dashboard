@@ -14,8 +14,9 @@ import {
     RiDiscussLine,
     RiArtboardLine,
     RiCloseLine,
+    RiChatSmile3Line,
 } from "react-icons/ri";
-import { Box, Button, HStack, Show } from "@chakra-ui/react";
+import { Box, Button, Hide, HStack, Show } from "@chakra-ui/react";
 import { CHAKRA_TABLET_BREAK_POINT, is_mobile, THEME } from "../../CONSTANTS";
 import { useSelector } from "react-redux";
 import { MainAppStore } from "../../interfaces";
@@ -45,40 +46,45 @@ export default function SideNav() {
                         </Button>
                     </HStack>
                 </Show>
-                <div className="sidebar__inner" style={{ paddingTop: is_mobile ? '0': '40px' }}>
+                <div
+                    className="sidebar__inner"
+                    style={{ paddingTop: is_mobile ? "0" : "40px" }}
+                >
                     <div>
-                        <EachNavContainer navHeading="Pages">
-                            <EachNav
-                                icon={<RiBarChart2Line />}
-                                isActive
-                                name="Overview"
-                                to="/"
-                            />
-                            <EachNav
-                                icon={<RiUser6Line />}
-                                isActive={false}
-                                name="Profile"
-                                to="/"
-                            />
-                            <EachNav
-                                icon={<RiChat1Line />}
-                                isActive={false}
-                                name="Messages"
-                                to="/"
-                            />
-                            <EachNav
-                                icon={<RiPlayCircleLine />}
-                                isActive={false}
-                                name="My Learning"
-                                to="/"
-                            />
-                            <EachNav
-                                icon={<RiNotification2Line />}
-                                isActive={false}
-                                name="Activities"
-                                to="/"
-                            />
-                        </EachNavContainer>
+                        <Hide breakpoint={CHAKRA_TABLET_BREAK_POINT}>
+                            <EachNavContainer navHeading="Pages">
+                                <EachNav
+                                    icon={<RiBarChart2Line />}
+                                    isActive
+                                    name="Overview"
+                                    to="/"
+                                />
+                                <EachNav
+                                    icon={<RiUser6Line />}
+                                    isActive={false}
+                                    name="Profile"
+                                    to="/"
+                                />
+                                <EachNav
+                                    icon={<RiChat1Line />}
+                                    isActive={false}
+                                    name="Messages"
+                                    to="/"
+                                />
+                                <EachNav
+                                    icon={<RiPlayCircleLine />}
+                                    isActive={false}
+                                    name="My Learning"
+                                    to="/"
+                                />
+                                <EachNav
+                                    icon={<RiNotification2Line />}
+                                    isActive={false}
+                                    name="Activities"
+                                    to="/"
+                                />
+                            </EachNavContainer>
+                        </Hide>
                         {user?.account_type === "instructor" && (
                             <EachNavContainer navHeading="Instructors">
                                 <EachNav
@@ -104,6 +110,12 @@ export default function SideNav() {
                                     isActive={false}
                                     name="Add New Class"
                                     to="/classes/new"
+                                />
+                                <EachNav
+                                    icon={<RiChatSmile3Line />}
+                                    isActive={false}
+                                    name="Reviews"
+                                    to="/reviews"
                                 />
                             </EachNavContainer>
                         )}
