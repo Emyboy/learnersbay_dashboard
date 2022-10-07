@@ -7,7 +7,6 @@ import {
     RiNotification2Line,
     RiBarChart2Line,
     RiListCheck2,
-    RiAddCircleLine,
     RiCalendarTodoLine,
     RiParentLine,
     RiCompass3Line,
@@ -106,7 +105,7 @@ export default function SideNav() {
                                     to="/classes"
                                 />
                                 <EachNav
-                                    icon={<RiAddCircleLine />}
+                                    icon={<RiArtboardLine />}
                                     isActive={false}
                                     name="Add New Class"
                                     to="/classes/new"
