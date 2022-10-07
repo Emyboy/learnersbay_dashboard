@@ -14,7 +14,7 @@ import {
     RiDiscussLine,
     RiArtboardLine,
     RiCloseLine,
-    RiChatSmile3Line,
+    RiStarLine,
 } from "react-icons/ri";
 import { Box, Button, Hide, HStack, Show } from "@chakra-ui/react";
 import { CHAKRA_TABLET_BREAK_POINT, is_mobile, THEME } from "../../CONSTANTS";
@@ -112,7 +112,7 @@ export default function SideNav() {
                                     to="/classes/new"
                                 />
                                 <EachNav
-                                    icon={<RiChatSmile3Line />}
+                                    icon={<RiStarLine />}
                                     isActive={false}
                                     name="Reviews"
                                     to="/reviews"
