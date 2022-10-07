@@ -18,4 +18,5 @@ export const THEME_LIGHT_TRANSPARENT = "#dcd5f3a1";
 
 export const is_mobile = window.innerWidth < 600;
 export const TABLET_BREAK_POINT = '900';
+export const CHAKRA_TABLET_BREAK_POINT = `(max-width: ${TABLET_BREAK_POINT}px)`;
 export const TABLET_WIDTH = 1000;

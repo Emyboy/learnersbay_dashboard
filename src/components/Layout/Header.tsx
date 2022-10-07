@@ -1,15 +1,21 @@
 import { Avatar } from "@chakra-ui/react";
 import React from "react";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "react-use";
 import { TABLET_WIDTH, THEME } from "../../CONSTANTS";
+import { MainAppStore } from "../../interfaces";
+import { setViewState } from "../../redux/actions/view.action";
 
 export default function Header() {
-
-    const { width } = useWindowSize()
+    const { width } = useWindowSize();
+    const { show_drawer } = useSelector((state: MainAppStore) => state.view);
 
     return (
-        <header className="header- -base-sidebar border-bottom-light bg-white js-header">
+        <header
+            className="header- -base-sidebar border-bottom-light bg-white js-header"
+            style={{ zIndex: 100 }}
+        >
             <div
                 className={`header__container ${
                     width < TABLET_WIDTH ? "py-10" : "py-20"
@@ -19,7 +25,14 @@ export default function Header() {
                     <div className="col-auto">
                         <div className="d-flex items-center">
                             <div className="header__explore text-dark-1">
-                                <button className="d-flex items-center js-dashboard-home-9-sidebar-toggle">
+                                <button
+                                    className="d-flex items-center js-dashboard-home-9-sidebar-toggle"
+                                    onClick={() =>
+                                        setViewState({
+                                            show_drawer: !show_drawer,
+                                        })
+                                    }
+                                >
                                     <i className="icon -dark-text-white icon-explore text-20"></i>
                                 </button>
                             </div>
@@ -27,9 +40,11 @@ export default function Header() {
                             <div className="header__logo ml-30 md:ml-20">
                                 <Link data-barba="" to="/">
                                     <img
-                                        className="-dark-d-none"
-                                        src="img/general/logo-dark.svg"
-                                        alt="item"
+                                        className="-dark-d-none shadow-2"
+                                        src="https://image.shutterstock.com/image-illustration/purple-graduation-cap-260nw-419582614.jpg"
+                                        alt="brand"
+                                        width={'60'}
+                                        style={{ borderRadius: '20px'}}
                                     />
                                 </Link>
                             </div>

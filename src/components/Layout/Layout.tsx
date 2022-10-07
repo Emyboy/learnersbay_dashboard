@@ -4,6 +4,8 @@ import Header from "./Header";
 import SideNav from "./SideNav";
 import { useWindowSize } from "react-use";
 import { TABLET_WIDTH } from "../../CONSTANTS";
+import { useSelector } from "react-redux";
+import { MainAppStore } from "../../interfaces";
 
 type Props = {
     children: ReactElement[] | ReactElement;
@@ -12,7 +14,7 @@ type Props = {
 
 export default function Layout({ children, full_screen }: Props) {
     const { width } = useWindowSize();
-
+    const { show_drawer } = useSelector((state: MainAppStore) => state.view);
     return (
         <>
             <div className="barba-container" data-barba="container">
@@ -21,7 +23,7 @@ export default function Layout({ children, full_screen }: Props) {
                     <div className="content-wrapper js-content-wrapper">
                         <div
                             className={`dashboard -home-9 px-0 js-dashboard-home-9 pt-0 mt-0 ${
-                                width < TABLET_WIDTH
+                                show_drawer === false
                                     ? "-is-sidebar-hidden"
                                     : ""
                             }`}
@@ -39,8 +41,8 @@ export default function Layout({ children, full_screen }: Props) {
                                         // minHeight: "100vh",
                                         height: "100vh",
                                         maxHeight: "100vh",
-                                        overflowY: 'scroll',
-                                        overflowX: 'hidden'
+                                        overflowY: "scroll",
+                                        overflowX: "hidden",
                                     }}
                                 >
                                     {children}

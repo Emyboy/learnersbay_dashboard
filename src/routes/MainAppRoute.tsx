@@ -15,7 +15,7 @@ export default function MainAppRoute() {
 
     return (
         <BrowserRouter>
-            {user ? (
+            {!user ? (
                 <Routes>
                     <Route path="*" element={<Login />} />
                     <Route path="/login" element={<Login />} />

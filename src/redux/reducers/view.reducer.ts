@@ -1,7 +1,7 @@
 import { ViewAction, ViewState } from "../../interfaces/index";
 
 const initialState: ViewState = {
-    show_drawer: false,
+    show_drawer: true,
     app_loading: false,
     verify_email_popup: false,
     show_search: false,
