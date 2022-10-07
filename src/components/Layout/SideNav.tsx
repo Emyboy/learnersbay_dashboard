@@ -6,7 +6,7 @@ import {
     RiPlayCircleLine,
     RiNotification2Line,
     RiBarChart2Line,
-    RiListCheck2,
+    RiAddCircleLine,
     RiCalendarTodoLine,
     RiParentLine,
     RiCompass3Line,
@@ -99,13 +99,13 @@ export default function SideNav() {
                                     to="/students"
                                 />
                                 <EachNav
-                                    icon={<RiListCheck2 />}
+                                    icon={<RiArtboardLine />}
                                     isActive={false}
                                     name="My Classes"
                                     to="/classes"
                                 />
                                 <EachNav
-                                    icon={<RiArtboardLine />}
+                                    icon={<RiAddCircleLine />}
                                     isActive={false}
                                     name="Add New Class"
                                     to="/classes/new"
