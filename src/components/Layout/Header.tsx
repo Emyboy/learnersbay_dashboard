@@ -1,11 +1,13 @@
-import { Avatar } from "@chakra-ui/react";
+import { Avatar, Box } from "@chakra-ui/react";
 import React from "react";
+import { RiSearch2Line } from "react-icons/ri";
 import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "react-use";
 import { TABLET_WIDTH, THEME } from "../../CONSTANTS";
 import { MainAppStore } from "../../interfaces";
 import { setViewState } from "../../redux/actions/view.action";
+import SearchPopup from "../Popups/SearchPopup";
 
 export default function Header() {
     const { width } = useWindowSize();
@@ -68,13 +70,15 @@ export default function Header() {
                         <div className="d-flex items-center">
                             <div className="d-flex items-center ">
                                 {/* HEADER ICONS HERE */}
-                                <Link
-                                    to="/notifications"
+                                <Box
+                                    onClick={() => setViewState({ show_search: true})}
+                                    cursor={'pointer'}
                                     className="d-flex items-center text-light-1 justify-center size-50 rounded-16 -hover-dshb-header-light"
                                     data-el-toggle=".js-notif-toggle"
                                 >
-                                    <i className="text-24 icon icon-search"></i>
-                                </Link>
+                                    <i className="text-24 icon"><RiSearch2Line /></i>
+                                </Box>
+                                <SearchPopup />
                                 <Link
                                     to="/notifications"
                                     className="d-flex items-center text-light-1 justify-center size-50 rounded-16 -hover-dshb-header-light"
