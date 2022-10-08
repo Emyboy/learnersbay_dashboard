@@ -107,7 +107,7 @@ export default function SideNav() {
                                 <EachNav
                                     icon={<RiAddCircleLine />}
                                     isActive={false}
-                                    name="Add New Class"
+                                    name="Create Class"
                                     to="/classes/new"
                                 />
                                 <EachNav

@@ -12,6 +12,8 @@ import Forum from "../pages/Forum/Forum";
 import AppLoading from "../components/AppLoading";
 import MasterControl from "../components/MasterControl";
 import AllPopups from "../components/Popups/AllPopups";
+import Classes from "../pages/Classes/Classes";
+import CreateClass from "../pages/CreateClass/CreateClass";
 
 export default function MainAppRoute() {
     const { user } = useSelector((state: MainAppStore) => state.auth);
@@ -32,6 +34,8 @@ export default function MainAppRoute() {
                     <Routes>
                         <Route path="/" element={<Overview />} />
                         <Route path="/forum" element={<Forum />} />
+                        <Route path="/classes" element={<Classes />} />
+                        <Route path="/classes/new" element={<CreateClass />} />
                     </Routes>
                 )}
             </BrowserRouter>

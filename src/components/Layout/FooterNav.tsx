@@ -9,7 +9,7 @@ import {
 } from "react-icons/ri";
 import { TABLET_BREAK_POINT } from "../../CONSTANTS";
 
-const iconSize = 27;
+const iconSize = 24;
 
 export default function FooterNav() {
     return (
@@ -18,7 +18,7 @@ export default function FooterNav() {
                 className="shadow-4 -base-sidebar border-top-light bg-white js-header"
                 style={{ position: "fixed", bottom: "0", left: 0, right: 0 }}
             >
-                <div className="header__container py-8 px-10">
+                <div className="header__container py-6 px-10">
                     <div className="d-flex items-center justify-content-between">
                         <div className="relative">
                             <a

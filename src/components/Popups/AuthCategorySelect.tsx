@@ -31,8 +31,10 @@ export default function AuthCategorySelect() {
     const [selectedCat, setSelectedCat] = useState<ClassCategory[]>([]);
     const [allowNext, setAllowNext] = useState(true);
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = () => {
+        setLoading(true)
         updateUserInfo({
             interested_categories: selectedCat.map((val) => val.id),
             interested_sub_categories: selectedSubCat.map((val) => val.id),
@@ -173,7 +175,7 @@ export default function AuthCategorySelect() {
                         _hover={{
                             bg: THEME,
                         }}
-                        disabled={!allowNext}
+                        disabled={!allowNext || loading}
                         onClick={step === 0 ? () => setStep(1) : handleSubmit}
                     >
                         <>{step === 0 ? "Next" : "Done"}</>
