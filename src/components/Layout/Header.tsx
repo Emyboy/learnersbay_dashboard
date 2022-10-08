@@ -1,6 +1,6 @@
 import { Avatar, Box } from "@chakra-ui/react";
 import React from "react";
-import { RiSearch2Line } from "react-icons/ri";
+import { RiCalendarTodoLine, RiSearch2Line } from "react-icons/ri";
 import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "react-use";
@@ -84,7 +84,7 @@ export default function Header() {
                                     className="d-flex items-center text-light-1 justify-center size-50 rounded-16 -hover-dshb-header-light"
                                     data-el-toggle=".js-notif-toggle"
                                 >
-                                    <i className="text-24 icon icon-calendar"></i>
+                                    <i className="text-24 icon"><RiCalendarTodoLine /></i>
                                 </Link>
                             </div>
                             <div className="relative d-flex items-center ml-10">
