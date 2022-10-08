@@ -11,15 +11,17 @@ export const setAuthState = (newState: any) => {
 };
 
 export const getAuthUser = async () => {
-    console.log("GETTING AUTH USER");
     try {
+        setViewState({ app_loading: true})
         const res = await AuthService.getAuthProfile();
         setAuthState({
             user: res,
         });
         console.log("FOUND USER AUTH --", res);
+        setViewState({ app_loading: false})
         return res;
     } catch (error) {
+        setViewState({ app_loading: false})
         return Promise.reject(error);
     }
 };

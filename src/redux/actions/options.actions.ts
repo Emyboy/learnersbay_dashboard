@@ -47,7 +47,7 @@ export const getAllClassLanguages = async () => {
     try {
         const res = await OptionsService.getAllClassLanguages();
         setOptionsState({
-            class_languages: res.data.data
+            class_languages: res.data.data,
         });
     } catch (error) {
         return Promise.reject(error);
@@ -58,7 +58,7 @@ export const getClassScheduleTypes = async () => {
     try {
         const res = await OptionsService.getClassScheduleTypes();
         setOptionsState({
-            class_schedule_types: res.data.data
+            class_schedule_types: res.data.data,
         });
     } catch (error) {
         return Promise.reject(error);
@@ -71,8 +71,30 @@ export const getAllOptions = async () => {
 };
 
 export const getAllClassOptions = async () => {
-    getClassCategories();
-    getClassSubCategories();
-    getAllClassLanguages();
-    getClassScheduleTypes();
+    const ClassCategories = await new ApiRequest(
+        "/class-categories?populate=*",
+        {
+            method: "GET",
+        },
+        false,
+    ).go();
+
+    const ClassSubCategories = await new ApiRequest(
+        "/class-sub-categories?populate=*",
+        {
+            method: "GET",
+        },
+        false,
+    ).go();
+
+    const AllClassLanguages = await OptionsService.getAllClassLanguages();
+
+    const ClassScheduleTypes = await OptionsService.getClassScheduleTypes();
+
+    setOptionsState({
+        class_categories: ClassCategories.data.data,
+        class_sub_categories: ClassSubCategories.data.data,
+        class_languages: AllClassLanguages.data.data,
+        class_schedule_types: ClassScheduleTypes.data.data,
+    });
 };
