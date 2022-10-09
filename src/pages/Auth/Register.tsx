@@ -16,13 +16,13 @@ const accountTypes = [
     {
         title: "I want to learn",
         role: USER_ROLE_ID,
-        icon: <img src="img/home-5/learning/2.svg" alt="image" />,
+        icon: <img src="img/home-5/learning/2.svg" alt="register option" />,
         sub_title: "Learn from anyone",
     },
     {
         title: "I want to teach",
         role: INSTRUCTOR_ROLE_ID,
-        icon: <img src="img/home-5/learning/3.svg" alt="image" />,
+        icon: <img src="img/home-5/learning/3.svg" alt="register option" />,
         sub_title: "Teach others your skill",
     },
 ];

@@ -20,3 +20,27 @@ export const is_mobile = window.innerWidth < 600;
 export const TABLET_BREAK_POINT = '900';
 export const CHAKRA_TABLET_BREAK_POINT = `(max-width: ${TABLET_BREAK_POINT}px)`;
 export const TABLET_WIDTH = 1000;
+
+
+
+// class thumbnail
+export const LG_THUMBNAIL_WIDTH = 600;
+export const LG_THUMBNAIL_HEIGHT = 600;
+export const SM_THUMBNAIL_WIDTH = 500;
+export const SM_THUMBNAIL_HEIGHT = 300;
+
+// options
+export const class_difficulty = [
+    {
+        label: "Beginners",
+        value: "beginner",
+    },
+    {
+        label: "Intermediate",
+        value: "intermediate",
+    },
+    {
+        label: "Advanced",
+        value: "advanced",
+    },
+];

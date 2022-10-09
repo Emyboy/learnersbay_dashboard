@@ -2,8 +2,6 @@ import React, { ReactElement } from "react";
 import FooterNav from "./FooterNav";
 import Header from "./Header";
 import SideNav from "./SideNav";
-import { useWindowSize } from "react-use";
-import { TABLET_WIDTH } from "../../CONSTANTS";
 import { useSelector } from "react-redux";
 import { MainAppStore } from "../../interfaces";
 
@@ -13,7 +11,6 @@ type Props = {
 };
 
 export default function Layout({ children, full_screen }: Props) {
-    const { width } = useWindowSize();
     const { show_drawer } = useSelector((state: MainAppStore) => state.view);
     return (
         <>
