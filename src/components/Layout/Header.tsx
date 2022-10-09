@@ -43,7 +43,7 @@ export default function Header() {
                                 <Link data-barba="" to="/">
                                     <img
                                         className="-dark-d-none shadow-2"
-                                        src="https://image.shutterstock.com/image-illustration/purple-graduation-cap-260nw-419582614.jpg"
+                                        src="/logo.svg"
                                         alt="brand"
                                         width={'60'}
                                         style={{ borderRadius: '20px'}}
