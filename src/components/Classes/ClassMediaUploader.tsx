@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
-import { Box, Button, Center, Text } from "@chakra-ui/react";
+import { Box, Center, Text } from "@chakra-ui/react";
 import {
     LG_THUMBNAIL_HEIGHT,
     LG_THUMBNAIL_WIDTH,

@@ -6,9 +6,8 @@ import { Box, Flex, Modal, ModalContent, ModalOverlay } from "@chakra-ui/react";
 import { THEME, THEME_LIGHT } from "../../CONSTANTS";
 import { RiSearch2Line } from "react-icons/ri";
 
-type Props = {};
 
-export default function SearchPopup({}: Props) {
+export default function SearchPopup() {
     const { show_search } = useSelector((state: MainAppStore) => state.view);
 
     if (!show_search) {

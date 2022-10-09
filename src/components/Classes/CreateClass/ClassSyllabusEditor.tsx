@@ -33,7 +33,7 @@ export function ClassSyllabusEditor({ ready }: FormsProps) {
 
     const removeSyllabus = (syllabus: ClassSyllabus) => {
         const _data: ClassSyllabus[] = [];
-        class_syllabus.map((val) => {
+        class_syllabus.forEach((val) => {
             if (val.attributes.index !== syllabus.attributes.index) {
                 _data.push(val);
             }
@@ -57,7 +57,7 @@ export function ClassSyllabusEditor({ ready }: FormsProps) {
                 ready(class_syllabus);
             }
         }
-    }, [class_syllabus]);
+    }, [class_syllabus, ready]);
 
     return (
         <div>
@@ -214,11 +214,11 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
                             color="white"
                             placement="top"
                         >
-                            <a
-                                href="#edit"
+                            <Box
+                                cursor={"pointer"}
                                 className="icon icon-edit mr-5"
                                 onClick={() => setEdit(true)}
-                            ></a>
+                            ></Box>
                         </Tooltip>
                     )}
                     <Tooltip
@@ -228,11 +228,11 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
                         color="white"
                         placement="top"
                     >
-                        <a
-                            href="#"
+                        <Box
+                            cursor={"pointer"}
                             className="icon icon-bin"
                             onClick={() => setAskDelete(true)}
-                        ></a>
+                        ></Box>
                     </Tooltip>
                     <div
                         className="accordion__icon mr-0"

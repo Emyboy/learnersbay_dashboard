@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
-import { ClassCategory, ClassSubCategory } from "../../interfaces/index";
+import { ClassCategory } from "../../interfaces/index";
 import React from "react";
-import { THEME_DARK, THEME_DARK_TRANSPARENT, THEME_LIGHT } from "../../CONSTANTS";
+import { THEME_DARK_TRANSPARENT, THEME_LIGHT } from "../../CONSTANTS";
 
 type Props = {
     data: ClassCategory;

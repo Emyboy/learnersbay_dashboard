@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { SignupForm } from "../../components/Auth/SignupForm";
 import { Box, useToast } from "@chakra-ui/react";
 import AuthLayout from "../../components/Auth/AuthLayout";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import { getAuthUser } from "../../redux/actions/auth.actions";
 import { INSTRUCTOR_ROLE_ID, USER_ROLE_ID } from "../../CONSTANTS";
 import { MainAppStore } from "../../interfaces/index";
-
-type Props = {};
 
 const accountTypes = [
     {
@@ -33,7 +31,7 @@ const EachAccountType = styled.div`
     }
 `;
 
-export default function Register({}: Props) {
+export default function Register() {
     const [selectedRole, setSelectedRole] = useState<number | null>(null);
     const toast = useToast();
     const dispatch = useDispatch();
@@ -57,8 +55,8 @@ export default function Register({}: Props) {
                 </h3>
                 <p className="mt-10">
                     Already have an account?{" "}
-                    <Link to={"/login"}>
-                        <a className="text-purple-1">Log in</a>
+                    <Link to={"/login"} className="text-purple-1">
+                        Log in
                     </Link>
                 </p>
 

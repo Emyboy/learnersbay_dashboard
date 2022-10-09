@@ -51,11 +51,12 @@ export function BasicInfo({ ready }: FormsProps) {
             difficulty_level &&
             language &&
             sub_categories &&
-            category.id !== null
+            category.id !== null &&
+            ready
         ) {
             ready(classData);
         }
-    }, [classData]);
+    }, [classData, ready]);
 
     const setClassData = (data: any) => {
         setClass({ ...classData, ...data });

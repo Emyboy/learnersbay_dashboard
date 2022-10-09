@@ -1,19 +1,19 @@
 import React from "react";
 
-type Props = {};
 
-export default function CreateClassPreview({}: Props) {
+export default function CreateClassPreview() {
     return (
         <div className="bg-white shadow-2 rounded-8 border-light py-10 px-10">
             <div className="d-flex items-center py-10 mb-3 px-10 border-bottom-light">
                 <h2 className="text-17 lh-1 fw-500">Preview</h2>
             </div>
             <div className="relative">
-                <img className="w-1/1" src="/img/misc/1.png" alt="image" />
+                <img className="w-1/1" src="/img/misc/1.png" alt="item" />
                 <div className="absolute-full-center d-flex justify-center items-center">
                     <a
                         className="d-flex justify-center items-center size-60 rounded-full bg-white js-gallery"
                         data-gallery="gallery1"
+                        href="#c"
                     >
                         <div className="icon-play text-18"></div>
                     </a>
@@ -102,28 +102,28 @@ export default function CreateClassPreview({}: Props) {
 
                 <div className="d-flex justify-center pt-15">
                     <a
-                        href="#"
+                        href="#c"
                         className="d-flex justify-center items-center size-40 rounded-full"
                     >
                         <i className="fa fa-facebook"></i>
                     </a>
 
                     <a
-                        href="#"
+                        href="#c"
                         className="d-flex justify-center items-center size-40 rounded-full"
                     >
                         <i className="fa fa-twitter"></i>
                     </a>
 
                     <a
-                        href="#"
+                        href="#c"
                         className="d-flex justify-center items-center size-40 rounded-full"
                     >
                         <i className="fa fa-instagram"></i>
                     </a>
 
                     <a
-                        href="#"
+                        href="#c"
                         className="d-flex justify-center items-center size-40 rounded-full"
                     >
                         <i className="fa fa-linkedin"></i>

@@ -1,6 +1,5 @@
 import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
 import { ClassSyllabus } from "../../../interfaces/index";
-import { ClassService } from "../../../services/API/class.service";
 import { ApiRequest } from "../../../utils/API.utils";
 import Cookies from "js-cookie";
 import React, { useCallback, useEffect } from "react";
@@ -25,55 +24,59 @@ export function CreatingClassLoading({
     const toast = useToast();
 
     const createNewCourse = useCallback(async () => {
-        try {
-            //todo - add slug and remove special char
-            const newClass = {
-                ...data,
-                category: data?.category?.id,
-                class_schedule_type: data?.class_schedule_type?.id,
-                language: data?.language?.id,
-                sub_categories: data?.sub_categories?.map(
-                    (val: any) => val.value.id,
-                ),
-            };
-            console.log("CREATING CLASS --", { newClass, thumbnail_file });
-            const res = await new ApiRequest(
-                `/courses`,
-                {
-                    data: {
+        if (data && thumbnail_file) {
+            try {
+                //todo - add slug and remove special char
+                const newClass = {
+                    ...data,
+                    category: data?.category?.id,
+                    class_schedule_type: data?.class_schedule_type?.id,
+                    language: data?.language?.id,
+                    sub_categories: data?.sub_categories?.map(
+                        (val: any) => val.value.id,
+                    ),
+                };
+                console.log("CREATING CLASS --", { newClass, thumbnail_file });
+                const res = await new ApiRequest(
+                    `/courses`,
+                    {
                         data: {
-                            thumbnail_file,
-                            // video_file,
-                            newClass,
-                            syllabus,
+                            data: {
+                                thumbnail_file,
+                                // video_file,
+                                newClass,
+                                syllabus,
+                            },
                         },
+                        headers: {
+                            authorization: `Bearer ${Cookies.get(
+                                "auth_token",
+                            )}`,
+                        },
+                        method: "POST",
                     },
-                    headers: {
-                        authorization: `Bearer ${Cookies.get("auth_token")}`,
-                    },
-                    method: "POST",
-                },
-                true,
-            ).go();
-            console.log(res.data);
-            if (done) {
-                done(res.data);
-            }
-        } catch (error) {
-            if (onError) {
-                onError();
-            }
-            toast({
-                title: ApiRequest.getErrorMessageText(error),
-                status: "error",
-                duration: 9000,
-                isClosable: true,
-                position: "top",
-            });
+                    true,
+                ).go();
+                console.log(res.data);
+                if (done) {
+                    done(res.data);
+                }
+            } catch (error) {
+                if (onError) {
+                    onError();
+                }
+                toast({
+                    title: ApiRequest.getErrorMessageText(error),
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                    position: "top",
+                });
 
-            return Promise.reject(error);
+                return Promise.reject(error);
+            }
         }
-    }, []);
+    }, [data, done, onError, syllabus, thumbnail_file, toast]);
 
     useEffect(() => {
         createNewCourse();
@@ -99,6 +102,7 @@ export function CreatingClassLoading({
                     width="200"
                     // src="https://www.bycom.pt/media/1505/404.gif"
                     src="https://res.cloudinary.com/ddjgvfkpq/image/upload/v1664499568/assets/404_b0xkvw.gif"
+                    alt='loading'
                 />
                 <Spinner />
                 <br />

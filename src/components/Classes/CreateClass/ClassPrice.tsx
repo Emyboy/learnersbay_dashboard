@@ -1,10 +1,9 @@
-import { Center, Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
+import { Center, InputGroup, InputLeftAddon } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import CurrencyInput from "react-currency-input-field";
 import { THEME, THEME_LIGHT } from "../../../CONSTANTS";
 import { FormsProps } from "./CreateClass.interface";
 
-type Props = {};
 
 const currencies = [
     {
@@ -37,7 +36,7 @@ export default function ClassPrice({ ready }: FormsProps) {
                 ready(price);
             }
         }
-    }, [price]);
+    }, [price, ready]);
 
     return (
         <div className="contact-form">

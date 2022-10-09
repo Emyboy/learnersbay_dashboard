@@ -31,7 +31,7 @@ export default function Create() {
         if (loading) {
             setLoading(false);
         }
-    }, [steps]);
+    }, [steps, loading]);
 
     const setData = (newData: any) => {
         setPlaceholderData({ ...placeholderData, ...newData });

@@ -1,15 +1,14 @@
 import React from "react";
 
-type Props = {};
 
-export function EachEnrolledClass({}: Props) {
+export function EachEnrolledClass() {
     return (
         <div className="w-1/5 xl:w-1/3 lg:w-1/2 sm:w-1/1">
             <div className="relative">
                 <img
                     className="rounded-8 w-1/1"
                     src="img/coursesCards/6.png"
-                    alt="image"
+                    alt="class thumbnail"
                 />
 
                 <button
@@ -23,14 +22,14 @@ export function EachEnrolledClass({}: Props) {
 
                 <div className="toggle-element -dshb-more js-more-6-toggle">
                     <div className="px-25 py-25 bg-white -dark-bg-dark-2 shadow-1 border-light rounded-8">
-                        <a href="#" className="d-flex items-center">
+                        <a href="#c" className="d-flex items-center">
                             <div className="icon-share"></div>
                             <div className="text-17 lh-1 fw-500 ml-12">
                                 Share
                             </div>
                         </a>
 
-                        <a href="#" className="d-flex items-center mt-20">
+                        <a href="#c" className="d-flex items-center mt-20">
                             <div className="icon-bookmark"></div>
                             <div className="text-17 lh-1 fw-500 ml-12">
                                 Favorite

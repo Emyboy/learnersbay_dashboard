@@ -1,8 +1,7 @@
 import React from "react";
 
-type Props = {};
 
-export default function EachClassCardSM({}: Props) {
+export default function EachClassCardSM() {
     return (
         <div className="col-lg-3 col-md-6">
             <div data-anim-child="slide-up delay-1" className="is-in-view">
@@ -15,7 +14,7 @@ export default function EachClassCardSM({}: Props) {
                             <img
                                 className="w-1/1"
                                 src="img/coursesCards/1.png"
-                                alt="image"
+                                alt="class thumbnail"
                             />
                             <div className="coursesCard__image_overlay rounded-8"></div>
                         </div>
@@ -46,7 +45,7 @@ export default function EachClassCardSM({}: Props) {
                                 <div className="mr-8">
                                     <img
                                         src="img/coursesCards/icons/1.svg"
-                                        alt="icon"
+                                        alt="button"
                                     />
                                 </div>
                                 <div className="text-14 lh-1">6 lesson</div>
@@ -56,7 +55,7 @@ export default function EachClassCardSM({}: Props) {
                                 <div className="mr-8">
                                     <img
                                         src="img/coursesCards/icons/2.svg"
-                                        alt="icon"
+                                        alt="button"
                                     />
                                 </div>
                                 <div className="text-14 lh-1">3h 56m</div>
@@ -66,7 +65,7 @@ export default function EachClassCardSM({}: Props) {
                                 <div className="mr-8">
                                     <img
                                         src="img/coursesCards/icons/3.svg"
-                                        alt="icon"
+                                        alt="button"
                                     />
                                 </div>
                                 <div className="text-14 lh-1">Beginner</div>
@@ -77,7 +76,7 @@ export default function EachClassCardSM({}: Props) {
                             <div className="coursesCard-footer__author">
                                 <img
                                     src="img/general/avatar-1.png"
-                                    alt="image"
+                                    alt="user avatar"
                                 />
                                 <div>Ali Tufan</div>
                             </div>

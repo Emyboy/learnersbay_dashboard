@@ -2,8 +2,8 @@ import { ClassScheduleType, MainAppStore } from "../../../interfaces/index";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FormsProps } from "./CreateClass.interface";
+import { Box } from "@chakra-ui/react";
 
-type Props = {};
 
 export function ClassType({ ready }: FormsProps) {
     const { class_schedule_types } = useSelector(
@@ -21,7 +21,7 @@ export function ClassType({ ready }: FormsProps) {
                 ready(selected);
             }
         }
-    }, [selected]);
+    }, [selected, ready]);
 
     useEffect(() => {
         setShow(true);
@@ -61,7 +61,8 @@ type EachProps = {
 
 const EachClassType = ({ data, isSelected, onSelect }: EachProps) => {
     return (
-        <a
+        <Box
+            cursor={'pointer'}
             className={`button rounded-16 mb-4 p-4 ${
                 isSelected ? "bg-purple-1 text-white" : "bg-light-6"
             } eventCard__bg bg-white -outline-purple-4`}
@@ -93,6 +94,6 @@ const EachClassType = ({ data, isSelected, onSelect }: EachProps) => {
                     </a>
                 </div> */}
             </div>
-        </a>
+        </Box>
     );
 };

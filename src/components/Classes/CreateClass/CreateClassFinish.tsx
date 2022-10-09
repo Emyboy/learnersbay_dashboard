@@ -1,10 +1,9 @@
-import { Box, Button, Center, Text, VStack } from '@chakra-ui/react'
+import { Button, Center, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { THEME } from '../../../CONSTANTS';
 
-type Props = {}
 
-export function CreateClassFinish({}: Props) {
+export function CreateClassFinish() {
 
     const [bg, setBg] = useState(
         "https://i.pinimg.com/originals/07/03/48/0703483f8e3100d87497817030fb903f.gif",
