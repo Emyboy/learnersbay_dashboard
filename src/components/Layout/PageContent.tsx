@@ -11,7 +11,7 @@ type Props = {
 export function PageContent({ children, pageHeading, pageSubHeading }: Props) {
     return (
         <Box
-            pt={["20", "20", "20", "40"]}
+            pt={["0", "0"]}
             pb="20"
             px={["2", "5", "5", "5", "20", "40"]}
             className="dashboard__content bg-light-4 animate__animated animate__fadeIn"

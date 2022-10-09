@@ -20,8 +20,8 @@ export default function MainAppRoute() {
 
     return (
         <div>
-            <AllPopups />
             <AppLoading />
+            <AllPopups />
             <MasterControl />
             <BrowserRouter>
                 {!user ? (

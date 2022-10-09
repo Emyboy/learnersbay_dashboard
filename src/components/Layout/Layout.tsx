@@ -4,6 +4,7 @@ import Header from "./Header";
 import SideNav from "./SideNav";
 import { useSelector } from "react-redux";
 import { MainAppStore } from "../../interfaces";
+import { is_mobile } from "../../CONSTANTS";
 
 type Props = {
     children: ReactElement[] | ReactElement;
@@ -28,7 +29,7 @@ export default function Layout({ children, full_screen }: Props) {
                             <SideNav />
                             <div className="dashboard__main mt-0">
                                 <div
-                                    className={`scroll-bar-1 ${
+                                    className={`${is_mobile && 'px-0 mx-0'} scroll-bar-1 ${
                                         !full_screen ? "dashboard__content" : ""
                                     }`}
                                     style={{

@@ -4,7 +4,7 @@ import { RiCalendarTodoLine, RiSearch2Line } from "react-icons/ri";
 import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "react-use";
-import { TABLET_WIDTH, THEME } from "../../CONSTANTS";
+import { is_mobile, TABLET_WIDTH, THEME } from "../../CONSTANTS";
 import { MainAppStore } from "../../interfaces";
 import { setViewState } from "../../redux/actions/view.action";
 import SearchPopup from "../Popups/SearchPopup";
@@ -45,8 +45,8 @@ export default function Header() {
                                         className="-dark-d-none shadow-2"
                                         src="/logo.svg"
                                         alt="brand"
-                                        width={'60'}
-                                        style={{ borderRadius: '20px'}}
+                                        width={is_mobile ? '45': '50'}
+                                        // style={{ borderRadius: '20px'}}
                                     />
                                 </Link>
                             </div>
@@ -99,6 +99,7 @@ export default function Header() {
                                         className="size-50"
                                         name="John Doe"
                                         borderRadius={"full"}
+                                        size={['sm','md']}
                                     />
                                     {/* <img
                                         src="img/misc/user-profile.png"

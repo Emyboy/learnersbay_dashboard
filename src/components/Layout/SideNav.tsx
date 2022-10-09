@@ -221,7 +221,7 @@ interface Props {
 
 const EachNav = ({ to, isActive, name, icon }: Props) => {
     return (
-        <div className={`sidebar__item ${isActive && "-is-active"}`} onClick={() => setViewState({ show_drawer: false})}>
+        <div className={`sidebar__item ${isActive && "-is-active"}`} onClick={() => is_mobile ? setViewState({ show_drawer: false}): null}>
             <Link
                 to={to}
                 className="-dark-sidebar-white d-flex items-center text-17 lh-1 fw-500"
