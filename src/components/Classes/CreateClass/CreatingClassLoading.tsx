@@ -2,9 +2,12 @@ import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
 import { ClassSyllabus } from "../../../interfaces/index";
 import { ApiRequest } from "../../../utils/API.utils";
 import Cookies from "js-cookie";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+
+// eslint-disable-next-line
 import { uploadBytesResumable, ref, getDownloadURL } from "firebase/storage";
-import { storage } from "../../../utils/Firebase";
+const { storage } = require("../../../utils/Firebase");
+
 
 type Props = {
     done: (e?: any) => void;
@@ -24,6 +27,7 @@ export function CreatingClassLoading({
     video_file,
 }: Props) {
     const toast = useToast();
+    const [introVideoURL, setIntroVideoURL] = useState("");
 
     const uploadVideo = useCallback(async (theFile: any) => {
         try {
@@ -55,8 +59,7 @@ export function CreatingClassLoading({
                     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                     getDownloadURL(uploadTask.snapshot.ref).then(
                         (downloadURL) => {
-                            console.log("File available at", downloadURL);
-                            createNewCourse(downloadURL)
+                            setIntroVideoURL(downloadURL);
                         },
                     );
                 },
@@ -130,19 +133,24 @@ export function CreatingClassLoading({
     );
 
     useEffect(() => {
+        console.log("UPLOAD DATA MOUNTED --", {
+            // data,
+            // syllabus,
+            // thumbnail_file,
+            // video_file,
+        });
         if (video_file) {
             uploadVideo(video_file);
         } else {
             createNewCourse(null);
         }
+    }, [video_file, createNewCourse, uploadVideo]);
 
-        console.log('UPLOAD DATA --', {
-            data,
-            syllabus,
-            thumbnail_file,
-            video_file
-        })
-    }, [createNewCourse, uploadVideo, video_file]);
+    useEffect(() => {
+        if (introVideoURL) {
+            createNewCourse(introVideoURL);
+        }
+    }, [introVideoURL, createNewCourse]);
 
     return (
         <Box

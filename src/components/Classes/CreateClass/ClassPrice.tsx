@@ -1,87 +1,92 @@
-import { Center, InputGroup, InputLeftAddon } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import {
+    Button,
+    Center,
+    InputGroup,
+    InputLeftAddon,
+    InputRightAddon,
+    Text,
+    Tooltip,
+    VStack,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
 import CurrencyInput from "react-currency-input-field";
-import { THEME, THEME_LIGHT } from "../../../CONSTANTS";
+import { RiCheckLine } from "react-icons/ri";
+import { is_mobile, THEME, THEME_LIGHT } from "../../../CONSTANTS";
 import { FormsProps } from "./CreateClass.interface";
-
-
-const currencies = [
-    {
-        short: "USD",
-        symbol: "$",
-        title: "Dollars",
-    },
-    {
-        short: "NGN",
-        symbol: "₦",
-        title: "Naira",
-    },
-    {
-        short: "EUR",
-        symbol: "€",
-        title: "Euro",
-    },
-];
 
 export default function ClassPrice({ ready }: FormsProps) {
     const [price, setPrice] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
 
-    useEffect(() => {
+    const savePrice = () => {
         if (price && price < 10) {
             setErrorMessage("Price is too low");
-        } else if(price > 10 && ready) {
+        } else if (price > 10 && ready) {
             setErrorMessage("");
-            if(ready){
-                console.log('READY RUNNING')
+            if (ready) {
                 ready(price);
             }
         }
-    }, [price, ready]);
+    };
 
     return (
         <div className="contact-form">
-            <div className="row justify-content-center">
-                {currencies.map((val) => {
-                    return (
-                        <div className="col-2" key={val.short}>
-                            <button className="p-3 fw-500 button -xs -purple-3 text-purple-1">
-                                {val.short}
-                            </button>
-                        </div>
-                    );
-                })}
-                <Center my="10" py="5">
-                    <div className="col-6">
-                        <InputGroup size="lg">
-                            <InputLeftAddon
-                                children="$"
-                                bg={THEME_LIGHT}
+            <Center my="10" py="5">
+                <VStack>
+                    <InputGroup size="lg">
+                        <InputLeftAddon
+                            children="$"
+                            bg={THEME_LIGHT}
+                            fontSize={"large"}
+                            color={THEME}
+                            fontWeight="bold"
+                        />
+                        <CurrencyInput
+                            id="input-example"
+                            name="input-name"
+                            placeholder="Please enter a number"
+                            className=" chakra-input css-11yakcc pl-10 fw-500 border p-0"
+                            style={{
+                                fontSize: "20px",
+                                outline: "none",
+                                width: is_mobile ? "176px" : "200px",
+                            }}
+                            defaultValue={price}
+                            decimalsLimit={2}
+                            onValueChange={(value, name) =>
+                                // console.log(value, name)
+                                setPrice(parseInt(`${value}`))
+                            }
+                            autoFocus
+                        />
+                        <Tooltip
+                            hasArrow
+                            label="Click here to save value"
+                            bg={THEME}
+                            placement="top"
+                        >
+                            <InputRightAddon
+                                children={
+                                    <Button
+                                        bg={THEME_LIGHT}
+                                        onClick={savePrice}
+                                    >
+                                        <RiCheckLine size={25} />
+                                    </Button>
+                                }
+                                // bg={THEME_LIGHT}
                                 fontSize={"large"}
                                 color={THEME}
+                                px="0"
                                 fontWeight="bold"
                             />
-                            <CurrencyInput
-                                id="input-example"
-                                name="input-name"
-                                placeholder="Please enter a number"
-                                className="text-center chakra-input css-11yakcc pl-10 fw-500 border p-0"
-                                style={{
-                                    fontSize: "20px",
-                                    outline: "none",
-                                }}
-                                defaultValue={price}
-                                decimalsLimit={2}
-                                onValueChange={(value, name) =>
-                                    // console.log(value, name)
-                                    setPrice(parseInt(`${value}`))
-                                }
-                            />
-                        </InputGroup>
-                        <small className="text-danger">{errorMessage}</small>
-                    </div>
-                </Center>
-            </div>
+                        </Tooltip>
+                    </InputGroup>
+                    <Text as="small" color={"red.400"} fontWeight="bold">
+                        {errorMessage}
+                    </Text>
+                </VStack>
+            </Center>
         </div>
     );
 }

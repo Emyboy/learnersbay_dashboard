@@ -30,7 +30,7 @@ export default function Layout({ children, full_screen }: Props) {
                             <div className="dashboard__main mt-0">
                                 <div
                                     className={`${is_mobile && 'px-0 mx-0'} scroll-bar-1 ${
-                                        !full_screen ? "dashboard__content" : ""
+                                        !full_screen ? "dashboard__content pt-5" : ""
                                     }`}
                                     style={{
                                         // paddingBottom: width < TABLET_WIDTH ? "17vh": "10vh",

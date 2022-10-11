@@ -81,7 +81,7 @@ export const ClassMediaUploader = ({
                 setImgFile(null);
             }
         })();
-    }, [imgFile]);
+    }, [imgFile, previewType]);
 
     const processBlob = (blob: any) => {
         const reader = new FileReader();
@@ -129,7 +129,7 @@ export const ClassMediaUploader = ({
                 }
             }
         }
-    }, [strapiFile, imgFile]);
+    }, [strapiFile, imgFile, done, previewType]);
 
 
     useEffect(() => {
@@ -329,7 +329,7 @@ const ImgPreview = ({
             <div className="absolute-full-center d-flex justify-end py-20 px-20">
                 {imgFile && (
                     <a
-                        href="#"
+                        href="#c"
                         className="d-flex justify-center items-center bg-white size-40 rounded-8 shadow-4"
                         onClick={onRemove}
                     >

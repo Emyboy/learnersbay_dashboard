@@ -15,7 +15,7 @@ import ThumbnailUpload from "../../components/Classes/CreateClass/ThumbnailUploa
 import React, { useEffect, useState } from "react";
 
 export default function Create() {
-    const [steps, setSteps] = useState(5);
+    const [steps, setSteps] = useState(0);
     const [loading, setLoading] = useState(false);
     const [allowNext, setAllowNext] = useState(false);
     const [placeholderData, setPlaceholderData] = useState<any>({

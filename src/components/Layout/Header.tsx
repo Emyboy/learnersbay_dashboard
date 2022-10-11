@@ -4,7 +4,7 @@ import { RiCalendarTodoLine, RiSearch2Line } from "react-icons/ri";
 import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "react-use";
-import { is_mobile, TABLET_WIDTH, THEME } from "../../CONSTANTS";
+import { is_mobile, TABLET_WIDTH } from "../../CONSTANTS";
 import { MainAppStore } from "../../interfaces";
 import { setViewState } from "../../redux/actions/view.action";
 import SearchPopup from "../Popups/SearchPopup";
@@ -46,7 +46,7 @@ export default function Header() {
                                         className="-dark-d-none shadow-2"
                                         src="/logo.svg"
                                         alt="brand"
-                                        width={is_mobile ? '40': '50'}
+                                        width={is_mobile ? '40': '48'}
                                         // style={{ borderRadius: '20px'}}
                                     />
                                 </Link>
@@ -95,7 +95,7 @@ export default function Header() {
                                 >
                                     <Avatar
                                         // src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`}
-                                        bg={THEME}
+                                        // bg={THEME}
                                         color="white"
                                         className="size-50"
                                         name={`${user?.first_name} ${user?.last_name}`}
