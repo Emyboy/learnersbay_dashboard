@@ -1,5 +1,4 @@
 import { ClassService } from "../../services/API/class.service"
-import { API } from "../../utils/API.utils"
 import store from "../store/store"
 
 export const setClassState = (newState:any) => {
