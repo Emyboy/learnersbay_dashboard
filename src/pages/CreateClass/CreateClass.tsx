@@ -7,7 +7,6 @@ import {
     ClassType,
     CreateClassFinish,
     CreatingClassLoading,
-    // IntroVideoUpload,
     StepContainer,
 } from "../../components/Classes/CreateClass";
 import ClassPrice from "../../components/Classes/CreateClass/ClassPrice";
@@ -16,7 +15,7 @@ import ThumbnailUpload from "../../components/Classes/CreateClass/ThumbnailUploa
 import React, { useEffect, useState } from "react";
 
 export default function Create() {
-    const [steps, setSteps] = useState(4);
+    const [steps, setSteps] = useState(5);
     const [loading, setLoading] = useState(false);
     const [allowNext, setAllowNext] = useState(false);
     const [placeholderData, setPlaceholderData] = useState<any>({
@@ -37,11 +36,11 @@ export default function Create() {
         setPlaceholderData({ ...placeholderData, ...newData });
     };
 
-    console.log("CLASS DATA --", {
-        placeholderData,
-        thumbnail_file,
-        video_file,
-    });
+    // console.log("CLASS DATA --", {
+    //     placeholderData,
+    //     thumbnail_file,
+    //     video_file,
+    // });
 
     const goNext = () => {
         setSteps(steps + 1);

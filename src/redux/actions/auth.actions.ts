@@ -20,7 +20,7 @@ export const getAuthUser = async (_attempts = 0) => {
             setAuthState({
                 user: res,
             });
-            console.log("FOUND USER AUTH --", res);
+            // console.log("FOUND USER AUTH --", res);
             setViewState({ app_loading: false });
             return res;
         } catch (error) {

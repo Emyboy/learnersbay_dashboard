@@ -12,6 +12,7 @@ import SearchPopup from "../Popups/SearchPopup";
 export default function Header() {
     const { width } = useWindowSize();
     const { show_drawer } = useSelector((state: MainAppStore) => state.view);
+    const { user } = useSelector((state: MainAppStore) => state.auth);
 
     return (
         <header
@@ -45,7 +46,7 @@ export default function Header() {
                                         className="-dark-d-none shadow-2"
                                         src="/logo.svg"
                                         alt="brand"
-                                        width={is_mobile ? '45': '50'}
+                                        width={is_mobile ? '40': '50'}
                                         // style={{ borderRadius: '20px'}}
                                     />
                                 </Link>
@@ -97,7 +98,7 @@ export default function Header() {
                                         bg={THEME}
                                         color="white"
                                         className="size-50"
-                                        name="John Doe"
+                                        name={`${user?.first_name} ${user?.last_name}`}
                                         borderRadius={"full"}
                                         size={['sm','md']}
                                     />

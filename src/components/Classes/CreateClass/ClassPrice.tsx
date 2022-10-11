@@ -30,9 +30,10 @@ export default function ClassPrice({ ready }: FormsProps) {
     useEffect(() => {
         if (price && price < 10) {
             setErrorMessage("Price is too low");
-        } else {
+        } else if(price > 10 && ready) {
             setErrorMessage("");
             if(ready){
+                console.log('READY RUNNING')
                 ready(price);
             }
         }

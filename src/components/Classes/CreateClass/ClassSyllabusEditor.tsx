@@ -13,7 +13,7 @@ import { ClassSyllabus } from "../../../interfaces/index";
 import React, { useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
 import { THEME, THEME_LIGHT } from "../../../CONSTANTS";
-// import renderHTML from "react-render-html";
+import { HTMLComponent } from "react-typescript-raw-html";
 import { FormsProps } from "./CreateClass.interface";
 
 export function ClassSyllabusEditor({ ready }: FormsProps) {
@@ -271,12 +271,12 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
                         </VStack>
                     ) : (
                         <div>
-                            {/* {renderHTML(
-                                `${
+                            <HTMLComponent
+                                rawHTML={`${
                                     _data.attributes.description ||
                                     "<small>No Section Description</small>"
-                                }`,
-                            )} */}
+                                }`}
+                            />
                         </div>
                     )}
                 </div>

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import React, {  useState, useEffect, useRef } from "react";
 import { Box, Center, Text } from "@chakra-ui/react";
 import {
     LG_THUMBNAIL_HEIGHT,
@@ -8,8 +8,6 @@ import {
 } from "../../CONSTANTS";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import Resizer from "react-image-file-resizer";
-import { uploadBytesResumable, ref, getDownloadURL } from "firebase/storage";
-import { storage } from "../../utils/Firebase";
 
 export enum PreviewTypes {
     video = "video",
@@ -118,63 +116,21 @@ export const ClassMediaUploader = ({
         }
     };
 
-    const uploadVideo = useCallback(async (theFile:any) => {
-        try {
-            console.log("UPLOADING WITH FIREBASE --", theFile);
-            const storageRef = ref(storage, "pic.jpg");
-            const uploadTask = uploadBytesResumable(storageRef, theFile);
-            uploadTask.on(
-                "state_changed",
-                (snapshot) => {
-                    // Observe state change events such as progress, pause, and resume
-                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                    const progress =
-                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log("Upload is " + progress + "% done");
-                    switch (snapshot.state) {
-                        case "paused":
-                            console.log("Upload is paused");
-                            break;
-                        case "running":
-                            console.log("Upload is running");
-                            break;
-                    }
-                },
-                (error) => {
-                    // Handle unsuccessful uploads
-                },
-                () => {
-                    // Handle successful uploads on complete
-                    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-                    getDownloadURL(uploadTask.snapshot.ref).then(
-                        (downloadURL) => {
-                            console.log("File available at", downloadURL);
-                        },
-                    );
-                },
-            );
-        } catch (error) {
-            console.log(error);
-            return Promise.reject(error);
-        }
-    }, []);
-
     useEffect(() => {
-        if (imgFile) {
-            uploadVideo(imgFile);
-        }
-    }, [imgFile]);
-
-    useEffect(() => {
-        if (strapiFile && done) {
-            // uploadClassThumbnail();
-            done(strapiFile);
+        if (previewType === "video" && done) {
+            done(imgFile);
         } else {
-            if (done) {
-                done(null);
+            if (strapiFile && done) {
+                // uploadClassThumbnail();
+                done(strapiFile);
+            } else {
+                if (done) {
+                    done(null);
+                }
             }
         }
-    }, [strapiFile]);
+    }, [strapiFile, imgFile]);
+
 
     useEffect(() => {
         if (error) {
