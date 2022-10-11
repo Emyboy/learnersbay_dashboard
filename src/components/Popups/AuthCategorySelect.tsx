@@ -6,6 +6,7 @@ import {
     Modal,
     ModalBody,
     ModalContent,
+    ModalFooter,
     ModalOverlay,
     Text,
 } from "@chakra-ui/react";
@@ -31,10 +32,10 @@ export default function AuthCategorySelect() {
     const [selectedCat, setSelectedCat] = useState<ClassCategory[]>([]);
     const [allowNext, setAllowNext] = useState(true);
     const [show, setShow] = useState(false);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = () => {
-        setLoading(true)
+        setLoading(true);
         updateUserInfo({
             interested_categories: selectedCat.map((val) => val.id),
             interested_sub_categories: selectedSubCat.map((val) => val.id),
@@ -63,7 +64,12 @@ export default function AuthCategorySelect() {
     }, [user_info, user]);
 
     return (
-        <Modal isOpen={show} onClose={() => {}} size={["full", "6xl"]}>
+        <Modal
+            scrollBehavior="inside"
+            isOpen={show}
+            onClose={() => {}}
+            size={["full", "2xl"]}
+        >
             <ModalOverlay />
             <ModalContent>
                 <ModalBody>
@@ -78,17 +84,17 @@ export default function AuthCategorySelect() {
                                 <>
                                     {user?.account_type === "instructor"
                                         ? "What do you want to teach?"
-                                        : "What do you want to learn?"}
+                                        : "What do you wish to learn?"}
                                 </>
                             ) : (
-                                <>{"What areas?"}</>
+                                <>{"Select targeted areas"}</>
                             )}
                         </Text>
                     </Center>
                     <Box
-                        height={["67vh", "50vh"]}
+                        // height={["67vh", "50vh"]}
                         className="scroll-bar-1"
-                        maxHeight={["68vh"]}
+                        // maxHeight={["68vh"]}
                         overflowY="scroll"
                     >
                         <Flex flexWrap={"wrap"} alignItems={"center"}>
@@ -164,8 +170,7 @@ export default function AuthCategorySelect() {
                         </Flex>
                     </Box>
                 </ModalBody>
-
-                <Center my="10">
+                <ModalFooter>
                     <Button
                         width={["60", "40"]}
                         size={["lg", "md"]}
@@ -180,7 +185,7 @@ export default function AuthCategorySelect() {
                     >
                         <>{step === 0 ? "Next" : "Done"}</>
                     </Button>
-                </Center>
+                </ModalFooter>
             </ModalContent>
         </Modal>
     );

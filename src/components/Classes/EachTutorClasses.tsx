@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export function EachEnrolledClass() {
+export function EachTutorClasses() {
     return (
         <div className="w-1/5 xl:w-1/3 lg:w-1/2 sm:w-1/1">
             <div className="relative">

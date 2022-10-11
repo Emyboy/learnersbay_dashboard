@@ -38,3 +38,18 @@ export class ApiRequest {
         }
     }
 }
+
+export const API = async (
+    url: string,
+    is_auth: boolean,
+    options?: AxiosRequestConfig,
+) => {
+    return await axios(API_URL + url, {
+        ...options,
+        headers: {
+            authorization: is_auth
+                ? `Bearer ${Cookies.get("auth_token")}`
+                : null,
+        },
+    });
+};

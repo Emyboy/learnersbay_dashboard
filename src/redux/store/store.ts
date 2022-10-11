@@ -11,6 +11,7 @@ store.subscribe(() => {
         auth: store.getState().auth,
         view: store.getState().view,
         options: store.getState().options,
+        classes: store.getState().classes,
     });
 });
 
