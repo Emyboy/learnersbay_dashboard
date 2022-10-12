@@ -1,4 +1,4 @@
-// import { Select } from "@chakra-ui/react";
+import { Select as Sell } from "@chakra-ui/react";
 import Select from "react-select";
 import { MainAppStore } from "../../../interfaces/index";
 import { getAllClassOptions } from "../../../redux/actions/options.actions";
@@ -152,13 +152,21 @@ export function BasicInfo({ ready }: FormsProps) {
                     Class Language*
                 </label>
 
-                <Select
+                {/* <Select
                     options={class_languages.map((val) => ({
                         value: val,
                         label: val.attributes.name,
                     }))}
                     onChange={(e) => setClassData({ language: e?.value })}
-                />
+                /> */}
+                <Sell placeholder="Select option" onChange={e =>}>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </Sell>
             </div>
         </form>
     );

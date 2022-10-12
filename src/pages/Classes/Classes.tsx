@@ -10,10 +10,10 @@ export default function Classes() {
     const { user } = useSelector((state: MainAppStore) => state.auth);
 
     useEffect(() => {
-        if(user){
-            getAllInstructorClasses(user?.id)
+        if (user) {
+            getAllInstructorClasses(user?.id);
         }
-    },[user])
+    }, [user, my_classes]);
 
     return (
         <Layout full_screen>

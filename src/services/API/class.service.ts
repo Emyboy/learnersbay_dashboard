@@ -1,4 +1,4 @@
-import { ApiRequest } from "../../utils/API.utils";
+import { API, ApiRequest } from "../../utils/API.utils";
 
 export class ClassService {
     static createNewClass(data: any) {
@@ -16,7 +16,21 @@ export class ClassService {
     }
 
     static getAllInstructorClasses(instructor_id: number) {
-        const res = new ApiRequest(`/courses?populate=*&instructor=${instructor_id}`, {method: 'GET'}, false).go();
+        const res = new ApiRequest(
+            `/courses?populate=*&instructor=${instructor_id}`,
+            { method: "GET" },
+            false,
+        ).go();
+        return res;
+    }
+
+    static async updateClassData(class_id: number, newData: any) {
+        const res = await API(`/course/${class_id}`, true, {
+            method: "PUT",
+            data: {
+                data: newData,
+            },
+        });
         return res;
     }
 }

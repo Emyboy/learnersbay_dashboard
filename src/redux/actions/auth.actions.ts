@@ -23,11 +23,16 @@ export const getAuthUser = async (_attempts = 0) => {
             // console.log("FOUND USER AUTH --", res);
             setViewState({ app_loading: false });
             return res;
-        } catch (error) {
+        } catch (error:any) {
+            console.log('THE ERROR ---',error)
+            if(error?.response?.status === 401){
+                logout()
+            }else {
+                setTimeout(() => {
+                    getAuthUser(attempts + 1)
+                }, 5000);
+            }
             // setViewState({ app_loading: false})
-            setTimeout(() => {
-                getAuthUser(attempts + 1)
-            }, 5000);
             return Promise.reject(error);
         }
     }
@@ -63,4 +68,5 @@ export const logout = () => {
         user: null,
         file_storage: null,
     });
+    window.location.reload()
 };

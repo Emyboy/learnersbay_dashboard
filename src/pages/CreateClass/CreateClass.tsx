@@ -47,7 +47,7 @@ export default function Create() {
     };
 
     return (
-        <Layout>
+        <Layout >
             <PageContent pageHeading="Create New Class">
                 <div className="row y-gap-60">
                     <div className="col-xl-8 col-lg-12">

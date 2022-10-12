@@ -16,7 +16,7 @@ export default function Header() {
 
     return (
         <header
-            className="header- -base-sidebar border-bottom-light bg-white js-header"
+            className="header- -base-sidebar border-bottom-light bg-white "
             style={{ zIndex: 100 }}
         >
             <div

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { MainAppStore } from "../interfaces";
 import { getAuthDependencies, getAuthUser } from "../redux/actions/auth.actions";
 import { getAllClassOptions } from "../redux/actions/options.actions";
+import { setViewState } from "../redux/actions/view.action";
 
 export default function MasterControl() {
     const { class_categories, class_sub_categories, class_schedule_types } =
@@ -22,11 +23,14 @@ export default function MasterControl() {
     }, [class_categories, class_sub_categories, class_schedule_types]);
 
     useEffect(() => {
-        if (Cookies.get("auth_token") && !user) {
+        const authToken = Cookies.get("auth_token")
+        if (authToken && !user) {
             console.log('NO USER')
             getAuthUser();
+        }else if(!authToken) {
+            setViewState({ app_loading: false})
         }
-    }, [user]);
+    }, []);
 
     useEffect(() => {
         if(user && !user_info){

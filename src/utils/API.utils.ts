@@ -44,7 +44,7 @@ export const API = async (
     is_auth: boolean,
     options?: AxiosRequestConfig,
 ) => {
-    return await axios(API_URL + url, {
+    return await axios(API_URL+ '/api' + url, {
         ...options,
         headers: {
             authorization: is_auth
