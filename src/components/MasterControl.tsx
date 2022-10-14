@@ -20,7 +20,8 @@ export default function MasterControl() {
         ) {
             getAllClassOptions();
         }
-    }, [class_categories, class_sub_categories, class_schedule_types]);
+    }, []);
+    // }, [class_categories, class_sub_categories, class_schedule_types]);
 
     useEffect(() => {
         const authToken = Cookies.get("auth_token")
