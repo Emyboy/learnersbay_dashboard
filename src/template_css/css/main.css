@@ -15987,14 +15987,14 @@ table.table td {
 }
 
 /* Quill Editor */
-.ql-toolbar,
+/* .ql-toolbar,
 .quill {
     border-radius: 7px;
 }
 .ql-container {
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
-}
+} */
 
 /* input[type="file"] {
     display: none;

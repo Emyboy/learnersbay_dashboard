@@ -8,16 +8,27 @@ import {
     Text,
     Tooltip,
     VStack,
+    Modal,
+    ModalContent,
+    ModalBody,
+    ModalOverlay,
 } from "@chakra-ui/react";
-import { ClassSyllabus } from "../../../interfaces/index";
+import { ClassSyllabus } from "../../../interfaces";
 import React, { useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
-import { THEME, THEME_LIGHT } from "../../../CONSTANTS";
+import { is_mobile, THEME, THEME_LIGHT } from "../../../CONSTANTS";
 import { HTMLComponent } from "react-typescript-raw-html";
 import { FormsProps } from "./CreateClass.interface";
+import "react-quill/dist/quill.snow.css";
+import SyllabusForm from "./SyllabusForm";
+
+const modules = {
+    toolbar: false,
+};
 
 export function ClassSyllabusEditor({ ready }: FormsProps) {
     const [class_syllabus, setClassSyllabus] = useState<ClassSyllabus[]>([]);
+    const [showAdd, setShowAdd] = useState(false);
 
     const addEmptySyllabus = () => {
         const newSyllabus: ClassSyllabus = {
@@ -61,6 +72,29 @@ export function ClassSyllabusEditor({ ready }: FormsProps) {
 
     return (
         <div>
+            <Modal
+                isOpen={showAdd}
+                onClose={() => {}}
+                size={["full", "full", "4xl"]}
+                scrollBehavior="inside"
+            >
+                <ModalOverlay />
+                <ModalContent minHeight={"80vh"}>
+                    <ModalBody>
+                        <Center my="10">
+                            <Text fontWeight={"bold"} fontSize="2xl">
+                                Add Syllabus
+                            </Text>
+                        </Center>
+                        <SyllabusForm
+                            done={(e) => {
+                                setClassSyllabus([...class_syllabus, e]);
+                                setShowAdd(false);
+                            }}
+                        />
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
             <Box mb="10" className="accordion -block-2 text-left js-accordion">
                 {class_syllabus.map((val, i) => {
                     return (
@@ -81,11 +115,15 @@ export function ClassSyllabusEditor({ ready }: FormsProps) {
             </Box>
 
             <Center>
-                <Button bg={THEME_LIGHT} py="10" onClick={addEmptySyllabus}>
-                    <VStack>
-                        <MdAdd />
-                        <Text className="mt-0">Add Syllabus</Text>
-                    </VStack>
+                <Button
+                    variant={"ghost"}
+                    pb={["40"]}
+                    onClick={() => setShowAdd(true)}
+                >
+                    <MdAdd size={25} color={THEME} />
+                    <Text className="mt-0 ml-5 text-purple-1">
+                        Add Syllabus
+                    </Text>
                 </Button>
             </Center>
         </div>
@@ -107,10 +145,8 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
         data?.attributes?.description || "",
     );
     const [title, setTitle] = useState(data?.attributes?.title || "");
-
-    const modules = {
-        toolbar: false,
-    };
+    const [showAdd, setShowAdd] = useState(false);
+    const [class_syllabus, setClassSyllabus] = useState<ClassSyllabus[]>([]);
 
     const _onSave = () => {
         if (onSave) {
@@ -175,52 +211,55 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
                 reveal && "is-active"
             }`}
         >
+            <Modal
+                isOpen={edit ? true : false}
+                onClose={() => {}}
+                size={["full", "full", "4xl"]}
+                scrollBehavior="inside"
+            >
+                <ModalOverlay />
+                <ModalContent minHeight={"80vh"}>
+                    <ModalBody>
+                        <Center my="10">
+                            <Text fontWeight={"bold"} fontSize="2xl">
+                                Edit Syllabus
+                            </Text>
+                        </Center>
+                        <SyllabusForm
+                            syllabusData={_data}
+                            done={(e) => {
+                                setClassSyllabus([...class_syllabus, e]);
+                                setShowAdd(false);
+                            }}
+                        />
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
             <div className="accordion__button py-20 px-30 bg-light-4">
                 <div className="d-flex items-center">
                     <div className="icon icon-drag mr-10"></div>
                     <span className="text-16 lh-1 fw-500 text-dark-1">
-                        {!edit ? (
-                            _data.attributes.title || "Untitled section"
-                        ) : (
-                            <Input
-                                placeholder="Enter a short section title"
-                                w="96"
-                                defaultValue={_data.attributes.title}
-                                size={"sm"}
-                                autoFocus
-                                maxLength={95}
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
-                        )}
+                        {is_mobile
+                            ? _data.attributes.title.slice(0, 12) + "..."
+                            : _data.attributes.title.slice(0, 70) + "..." ||
+                              "Untitled section"}
                     </span>
                 </div>
 
                 <div className="d-flex x-gap-10 items-center">
-                    {edit ? (
-                        <Button
-                            onClick={_onSave}
-                            pr="5"
-                            variant={"link"}
-                            size="sm"
-                            color={THEME}
-                        >
-                            Save
-                        </Button>
-                    ) : (
-                        <Tooltip
-                            hasArrow
-                            label="Edit Title"
-                            bg={THEME}
-                            color="white"
-                            placement="top"
-                        >
-                            <Box
-                                cursor={"pointer"}
-                                className="icon icon-edit mr-5"
-                                onClick={() => setEdit(true)}
-                            ></Box>
-                        </Tooltip>
-                    )}
+                    <Tooltip
+                        hasArrow
+                        label="Edit Title"
+                        bg={THEME}
+                        color="white"
+                        placement="top"
+                    >
+                        <Box
+                            cursor={"pointer"}
+                            className="icon icon-edit mr-5"
+                            onClick={() => setEdit(true)}
+                        ></Box>
+                    </Tooltip>
                     <Tooltip
                         hasArrow
                         label="Remove section"
@@ -252,33 +291,22 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
                 }}
             >
                 <div className="accordion__content__inner px-30 py-30">
-                    {edit ? (
-                        <VStack style={{ width: "100%" }}>
-                            <label>Section description</label>
-                            <ReactQuill
-                                modules={modules}
-                                theme="snow"
-                                placeholder="Give a detailed explanation of this section"
-                                value={description}
-                                onChange={(e: React.SetStateAction<string>) => {
-                                    setDescription(e);
-                                }}
-                                style={{
-                                    width: "100%",
-                                    height: edit ? "230px" : "100px",
-                                }}
-                            />
-                        </VStack>
-                    ) : (
-                        <div>
-                            <HTMLComponent
-                                rawHTML={`${
-                                    _data.attributes.description ||
-                                    "<small>No Section Description</small>"
-                                }`}
-                            />
-                        </div>
-                    )}
+                    <VStack style={{ width: "100%" }}>
+                        <label>Section description</label>
+                        <ReactQuill
+                            modules={modules}
+                            theme="snow"
+                            placeholder="Give a detailed explanation of this section"
+                            value={description}
+                            onChange={(e: React.SetStateAction<string>) => {
+                                setDescription(e);
+                            }}
+                            style={{
+                                width: "100%",
+                                height: edit ? "230px" : "100px",
+                            }}
+                        />
+                    </VStack>
                 </div>
             </div>
         </div>

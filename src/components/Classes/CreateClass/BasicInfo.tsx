@@ -1,6 +1,6 @@
 import { Select as Sell } from "@chakra-ui/react";
 import Select from "react-select";
-import { MainAppStore } from "../../../interfaces/index";
+import { MainAppStore } from "../../../interfaces";
 import { getAllClassOptions } from "../../../redux/actions/options.actions";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -32,7 +32,9 @@ export function BasicInfo({ ready }: FormsProps) {
     console.log(classData);
 
     useEffect(() => {
-        getAllClassOptions();
+        (async () => {
+            await getAllClassOptions();
+        })()
     }, []);
 
     useEffect(() => {
@@ -140,12 +142,17 @@ export function BasicInfo({ ready }: FormsProps) {
                     Class Difficulty Level*
                 </label>
 
-                <Select
-                    options={class_difficulty}
-                    onChange={(e) =>
-                        setClassData({ difficulty_level: e?.value })
+
+                <select placeholder="Select option" onChange={(e) => setClassData({ difficulty_level: JSON.parse(e.target.value) })}>
+                    <option>Select One</option>
+                    {
+                        class_difficulty.map((val) => {
+                            return <option key={`level-${val.value}`}
+                                value={JSON.stringify(val)}>{val.value}</option>;
+                        })
                     }
-                />
+
+                </select>
             </div>
             <div className="col-md-6">
                 <label className="text-16 lh-1 fw-500 text-dark-1 mb-10">
@@ -159,14 +166,16 @@ export function BasicInfo({ ready }: FormsProps) {
                     }))}
                     onChange={(e) => setClassData({ language: e?.value })}
                 /> */}
-                <Sell placeholder="Select option" onChange={e =>}>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                </Sell>
+                <select placeholder="Select option" onChange={(e) => setClassData({ language: JSON.parse(e.target.value) })}>
+                    <option>Select One</option>
+                    {
+                        class_languages.map((val) => {
+                            return <option key={`language-${val.id}`}
+                                           value={JSON.stringify(val)}>{val.attributes.name}</option>;
+                        })
+                    }
+
+                </select>
             </div>
         </form>
     );

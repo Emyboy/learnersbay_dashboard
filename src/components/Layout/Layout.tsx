@@ -5,6 +5,7 @@ import SideNav from "./SideNav";
 import { useSelector } from "react-redux";
 import { MainAppStore } from "../../interfaces";
 import { is_mobile } from "../../CONSTANTS";
+import MainErrorBoundary from '../Errors/MainErrorBoundary'
 
 type Props = {
     children: ReactElement[] | ReactElement;
@@ -43,7 +44,9 @@ export default function Layout({ children, full_screen }: Props) {
                                         overflowX: "hidden",
                                     }}
                                 >
+                                    <MainErrorBoundary>
                                     {children}
+                                    </MainErrorBoundary>
                                 </div>
                             </div>
                         </div>

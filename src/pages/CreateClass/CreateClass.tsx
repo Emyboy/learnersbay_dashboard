@@ -15,7 +15,7 @@ import ThumbnailUpload from "../../components/Classes/CreateClass/ThumbnailUploa
 import React, { useEffect, useState } from "react";
 
 export default function Create() {
-    const [steps, setSteps] = useState(0);
+    const [steps, setSteps] = useState(2);
     const [loading, setLoading] = useState(false);
     const [allowNext, setAllowNext] = useState(false);
     const [placeholderData, setPlaceholderData] = useState<any>({
@@ -47,7 +47,7 @@ export default function Create() {
     };
 
     return (
-        <Layout >
+        <Layout full_screen>
             <PageContent pageHeading="Create New Class">
                 <div className="row y-gap-60">
                     <div className="col-xl-8 col-lg-12">

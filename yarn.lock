@@ -9583,6 +9583,11 @@ react-currency-input-field@^3.6.5:
   resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.6.5.tgz#67ed7005a2f1402cb70a23050f6b997e6d1452b6"
   integrity sha512-tP62WFAhkVv0RGOQVGEPE3MfgciQ4gkiASlmLBDu6tdfMC3jFhIkLU1uqUy3glUvRHyT4avnX/YVVbbXKHLtnA==
 
+react-date-object@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/react-date-object/-/react-date-object-2.1.5.tgz#9f139cf0fbd9b8033cc18699be2ea14a772dbd73"
+  integrity sha512-iAtF2nz+jZjy3w36qKx2MsxXqbiL7UgGljz9jPjLWxWCl4rDTZUMS/i7hKKiVbL1lJlmubz1Xu6W3i6CW06kTg==
+
 react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"
@@ -9625,6 +9630,11 @@ react-dom@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-element-popper@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/react-element-popper/-/react-element-popper-2.1.6.tgz#4afb912287d57de5d442fb85e76f4d7b94fde879"
+  integrity sha512-8va7mUmrKIkUnaM2t5Dyctd8cjgVgVcrv5vVD0FRay0sN6EPBCKa0bDi1/KmVDAjfgSIn7zQnjtc4VojcGrkgQ==
 
 react-error-overlay@^6.0.11:
   version "6.0.11"
@@ -9677,6 +9687,14 @@ react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+
+react-multi-date-picker@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-multi-date-picker/-/react-multi-date-picker-3.3.1.tgz#0f9fbb69218ddffa4d32260b91aa4d71c095335d"
+  integrity sha512-W6SUBCULMgfNJstQx7BNzojkNdG9LVpOdYJIMjqTS1scWZ9BqG8nIIOhHUAObrTEdwz2S7eMxcDg6UeXe5D6uw==
+  dependencies:
+    react-date-object "^2.1.5"
+    react-element-popper "^2.1.6"
 
 react-phone-number-input@^3.2.11:
   version "3.2.11"
