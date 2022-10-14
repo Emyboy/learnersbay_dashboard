@@ -13,7 +13,7 @@ export default function Classes() {
         if (user) {
             getAllInstructorClasses(user?.id);
         }
-    }, [user, my_classes]);
+    }, [user]);
 
     return (
         <Layout full_screen>

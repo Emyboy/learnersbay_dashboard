@@ -18,28 +18,55 @@ const modules = {
 type Props = {
     syllabusData?: ClassSyllabus;
     done?: (e: any) => void;
+    edit?: boolean;
 };
 
-export default function SyllabusForm({ done, syllabusData }: Props) {
+export default function SyllabusForm({ done, syllabusData, edit }: Props) {
     const [schedule, setSchedule] = useState<string>("");
     const [title, setTitle] = useState(syllabusData?.attributes.title || "");
     const [description, setDescription] = useState(
         syllabusData?.attributes.description || "",
     );
     const [previewDescription, setPreview] = useState(false);
+    const [_syllabusData, setSyllabusData] = useState<ClassSyllabus>(
+        {
+        id: syllabusData?.id,
+        attributes: {
+            title: syllabusData?.attributes.title || "",
+            class: syllabusData?.attributes.class,
+            description: syllabusData?.attributes.description || "",
+        },
+    }
+    );
 
     const handleSubmit = async () => {
         if (!syllabusData && done) {
             done({
                 isNew: false,
                 attributes: {
-                    title,
-                    index: 2,
-                    description,
+                    title: _syllabusData.attributes.title,
+                    index: 0,
+                    description: _syllabusData.attributes.description,
                 },
             });
         }
+         if (syllabusData && done) {
+            done({});
+        } else if (syllabusData && edit && done) {
+            // todo - make API call to save data
+        }
     };
+    console.log("DATA ---", _syllabusData);
+
+    const handleChange = (data:any) => {
+        setSyllabusData({
+            ..._syllabusData,
+            attributes: {
+                ..._syllabusData?.attributes,
+                ...data,
+            },
+        });
+    }
 
     return (
         <form className="contact-form respondForm__form">
@@ -50,9 +77,18 @@ export default function SyllabusForm({ done, syllabusData }: Props) {
                 <Input
                     placeholder="An introduction to XYZ"
                     autoFocus
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={(e) =>
+                        // setSyllabusData({
+                        //     ..._syllabusData,
+                        //     attributes: {
+                        //         ..._syllabusData?.attributes,
+                        //         title: e.target.value,
+                        //     },
+                        // })
+                        handleChange({ title: e.target.value })
+                    }
                     maxLength={100}
-                    value={title}
+                    value={_syllabusData.attributes.title}
                 />
             </Box>
             <Box mb="5">
@@ -76,7 +112,7 @@ export default function SyllabusForm({ done, syllabusData }: Props) {
             </Box>
             <Box mb="10">
                 <Flex justifyContent={"space-between"}>
-                    <label className="mb-3">Section description</label>{" "}
+                    <label className="mb-3">Short description</label>{" "}
                     <span className="ml-5">
                         <small>Preview</small>
                         <Switch
@@ -92,9 +128,9 @@ export default function SyllabusForm({ done, syllabusData }: Props) {
                         modules={modules}
                         theme="snow"
                         placeholder="Give a detailed explanation of this section"
-                        value={description}
+                        value={_syllabusData.attributes.description}
                         onChange={(e: React.SetStateAction<string>) => {
-                            setDescription(e);
+                            handleChange({ description: e });
                         }}
                         style={{
                             width: "100%",

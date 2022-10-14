@@ -18,7 +18,7 @@ const Providers = ({ children }: any) => {
                     300: THEME_LIGHT,
                     400: THEME_LIGHT,
                     500: THEME,
-                    600: THEME_LIGHT,
+                    600: THEME,
 
                     900: THEME,
                 },

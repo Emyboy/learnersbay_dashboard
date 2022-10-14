@@ -42,7 +42,7 @@ export interface ClassSyllabus{
     isNew?: boolean;
     attributes: {
         title: string;
-        index: number;
+        index?: number;
         description?: string;
         class?: ClassData
     }
