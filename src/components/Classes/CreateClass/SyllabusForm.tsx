@@ -2,7 +2,7 @@ import { Box, Flex, Input, Switch, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import { HTMLComponent } from "react-typescript-raw-html";
-import { THEME_LIGHT } from "../../../CONSTANTS";
+import { is_mobile, THEME_LIGHT } from "../../../CONSTANTS";
 import { ClassSyllabus } from "../../../interfaces";
 
 var toolbarOptions = [
@@ -23,21 +23,15 @@ type Props = {
 
 export default function SyllabusForm({ done, syllabusData, edit }: Props) {
     const [schedule, setSchedule] = useState<string>("");
-    const [title, setTitle] = useState(syllabusData?.attributes.title || "");
-    const [description, setDescription] = useState(
-        syllabusData?.attributes.description || "",
-    );
     const [previewDescription, setPreview] = useState(false);
-    const [_syllabusData, setSyllabusData] = useState<ClassSyllabus>(
-        {
+    const [_syllabusData, setSyllabusData] = useState<ClassSyllabus>({
         id: syllabusData?.id,
         attributes: {
             title: syllabusData?.attributes.title || "",
             class: syllabusData?.attributes.class,
             description: syllabusData?.attributes.description || "",
         },
-    }
-    );
+    });
 
     const handleSubmit = async () => {
         if (!syllabusData && done) {
@@ -50,15 +44,16 @@ export default function SyllabusForm({ done, syllabusData, edit }: Props) {
                 },
             });
         }
-         if (syllabusData && done) {
-            done({});
+        if (syllabusData && done) {
+            console.log('SAVING EDITS')
+            done(_syllabusData);
         } else if (syllabusData && edit && done) {
             // todo - make API call to save data
         }
     };
-    console.log("DATA ---", _syllabusData);
+    // console.log("DATA ---", _syllabusData);
 
-    const handleChange = (data:any) => {
+    const handleChange = (data: any) => {
         setSyllabusData({
             ..._syllabusData,
             attributes: {
@@ -66,13 +61,13 @@ export default function SyllabusForm({ done, syllabusData, edit }: Props) {
                 ...data,
             },
         });
-    }
+    };
 
     return (
         <form className="contact-form respondForm__form">
             <Box mb="5">
                 <label className="mb-3">
-                    Section Title ({title.length}/100)
+                    Section Title ({_syllabusData.attributes.title.length}/100)
                 </label>
                 <Input
                     placeholder="An introduction to XYZ"
@@ -134,7 +129,7 @@ export default function SyllabusForm({ done, syllabusData, edit }: Props) {
                         }}
                         style={{
                             width: "100%",
-                            height: "200px",
+                            height: is_mobile ? "200px" : "400px",
                         }}
                     />
                 ) : (
@@ -148,7 +143,7 @@ export default function SyllabusForm({ done, syllabusData, edit }: Props) {
                     >
                         <HTMLComponent
                             rawHTML={`${
-                                description ||
+                                _syllabusData.attributes.description ||
                                 "<small>No Section Description</small>"
                             }`}
                         />
@@ -160,7 +155,11 @@ export default function SyllabusForm({ done, syllabusData, edit }: Props) {
                 <div className="d-inline-block">
                     <button
                         type="button"
-                        disabled={!title && !description && !schedule}
+                        disabled={
+                            !_syllabusData.attributes.title &&
+                            !_syllabusData.attributes.description &&
+                            !schedule
+                        }
                         onClick={handleSubmit}
                         className="button -md -dark-1 text-white"
                     >

@@ -15,7 +15,7 @@ export default function FooterNav() {
     return (
         <Show breakpoint={`(max-width: ${TABLET_BREAK_POINT}px)`}>
             <footer
-                className="shadow-4 -base-sidebar border-top-light bg-white js-header"
+                className="shadow-4 -base-sidebar border-top-light bg-white js-header py-5"
                 style={{ position: "fixed", bottom: "0", left: 0, right: 0 }}
             >
                 <div className="header__container py-6 px-10">

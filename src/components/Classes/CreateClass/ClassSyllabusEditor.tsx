@@ -119,6 +119,7 @@ export function ClassSyllabusEditor({ ready }: FormsProps) {
                 <Button
                     variant={"ghost"}
                     pb={["40"]}
+                    pt="10"
                     onClick={() => setShowAdd(true)}
                 >
                     <MdAdd size={25} color={THEME} />

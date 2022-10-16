@@ -6,15 +6,15 @@ type Props = {
     children: ReactElement[] | ReactElement;
     pageHeading?: string;
     pageSubHeading?: string;
+    full_screen?: boolean;
 };
 
 export function PageContent({ children, pageHeading, pageSubHeading }: Props) {
     return (
         <Box
             pt={["0", "0"]}
-            pb="20"
             px={["2", "5", "5", "5", "20", "40"]}
-            className="dashboard__content bg-light-4 animate__animated animate__fadeIn"
+            className={`bg-light-4 animate__animated animate__fadeIn`}
         >
             {pageHeading && (
                 <PageHeading
@@ -22,7 +22,8 @@ export function PageContent({ children, pageHeading, pageSubHeading }: Props) {
                     pageSubHeading={pageSubHeading}
                 />
             )}
-            <Box style={{ minHeight: "60vh" }}>{children}</Box>
+            <Box pb="60" style={{ minHeight: "60vh" }}>{children}</Box>
+
         </Box>
     );
 }

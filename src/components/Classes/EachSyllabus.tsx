@@ -118,8 +118,9 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
                         <SyllabusForm
                             syllabusData={_data}
                             done={(e) => {
-                                setClassSyllabus([...class_syllabus, e]);
-                                setShowAdd(false);
+                                // setClassSyllabus([...class_syllabus, e]);
+                                setData(e);
+                                setEdit(false);
                             }}
                         />
                     </ModalBody>
@@ -180,15 +181,19 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
                     minHeight: reveal ? "280px" : "0px",
                 }}
             >
-                <div className="accordion__content__inner px-30 py-30">
-                    <VStack style={{ width: "100%" }}>
-                        <label>Section description</label>
-                        <HTMLComponent
-                            rawHTML={`${
-                                _data.attributes.description ||
-                                "<small>No Section Description</small>"
-                            }`}
-                        />
+                <div className="accordion__content__inner px-10 py-20">
+                    <Box style={{ width: "100%" }}>
+                        <Center>
+                            <label className='mb-10'>Section description</label>
+                        </Center>
+                        <Box py="5" px="5" overflowY="scroll" maxH='40vh' className='scroll-bar-1'>
+                            <HTMLComponent
+                                rawHTML={`${
+                                    _data.attributes.description ||
+                                    "<small>No Section Description</small>"
+                                }`}
+                            />
+                        </Box>
                         {/* <ReactQuill
                             // modules={modules}
                             theme="snow"
@@ -202,7 +207,7 @@ const EachSyllabus = ({ data, onRemove, onSave }: EachSyllabusProps) => {
                                 height: edit ? "230px" : "100px",
                             }}
                         /> */}
-                    </VStack>
+                    </Box>
                 </div>
             </div>
         </div>
