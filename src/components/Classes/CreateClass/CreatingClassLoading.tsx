@@ -1,4 +1,4 @@
-import { Box, Flex, Spinner, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, Spinner, useToast } from "@chakra-ui/react";
 import { ClassSyllabus, MainAppStore } from "../../../interfaces/index";
 import { ApiRequest } from "../../../utils/API.utils";
 import Cookies from "js-cookie";
@@ -8,6 +8,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { uploadBytesResumable, ref, getDownloadURL } from "firebase/storage";
 import { useSelector } from "react-redux";
 import { ClassService } from "../../../services/API/class.service";
+import { BsCheckLg } from "react-icons/bs";
 const { storage } = require("../../../utils/Firebase");
 
 type Props = {
@@ -18,6 +19,12 @@ type Props = {
     thumbnail_file: any;
     video_file: any;
 };
+
+enum PageState {
+    LOADING = "loading",
+    ERROR = "error",
+    NULL = "null",
+}
 
 export function CreatingClassLoading({
     done,
@@ -31,6 +38,7 @@ export function CreatingClassLoading({
 
     const toast = useToast();
     const { user } = useSelector((state: MainAppStore) => state.auth);
+    const [pageState, setPageState] = useState<PageState>(PageState.NULL);
 
     const updateClass = async (class_id: number, data: any) => {
         try {
@@ -76,6 +84,7 @@ export function CreatingClassLoading({
                     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                     getDownloadURL(uploadTask.snapshot.ref).then(
                         (downloadURL) => {
+                            console.log("THE VIDEO URL --", downloadURL);
                             updateClass(newClass?.id, {
                                 intro_video: downloadURL,
                             });
@@ -128,12 +137,11 @@ export function CreatingClassLoading({
                     true,
                 ).go();
                 console.log("CLASS CREATED ---", res.data);
-                if (video_file) {
-                    uploadVideo(res.data);
-                } else {
-                    if (done) {
-                        done(res.data);
-                    }
+                if (res.data && video_file) {
+                    return uploadVideo(res.data);
+                }
+                if (done) {
+                    done(res.data);
                 }
             } catch (error) {
                 if (onError) {
@@ -152,20 +160,6 @@ export function CreatingClassLoading({
         }
     }, [data, done, onError, syllabus, thumbnail_file, toast]);
 
-    useEffect(() => {
-        console.log("UPLOAD DATA MOUNTED --", {
-            // data,
-            // syllabus,
-            // thumbnail_file,
-            // video_file,
-        });
-        // if (video_file) {
-        //     uploadVideo(video_file);
-        // } else {
-        // }
-        createNewCourse();
-    }, [video_file, createNewCourse, uploadVideo]);
-
     return (
         <Box
             py="10"
@@ -182,15 +176,39 @@ export function CreatingClassLoading({
                 alignItems="center"
                 flexDirection={"column"}
             >
-                <img
-                    width="200"
-                    // src="https://www.bycom.pt/media/1505/404.gif"
-                    src="https://res.cloudinary.com/ddjgvfkpq/image/upload/v1664499568/assets/404_b0xkvw.gif"
-                    alt="loading"
-                />
-                <Spinner />
-                <br />
-                <h3 className="fw-500">Publishing Your Class</h3>
+                {pageState === PageState.NULL && (
+                    <>
+                        <BsCheckLg className="text-purple-1 mb-5" size={50} />
+                        <br />
+                        <h1 className="sectionTitle__title ">
+                            You're all good to go
+                        </h1>
+                        <br />
+                        <br />
+                        <br />
+                        <Button size="lg" onClick={createNewCourse}>
+                            Upload Class
+                        </Button>
+                        <br />
+                        <br />
+                    </>
+                )}
+                {pageState === PageState.LOADING && (
+                    <>
+                        <img
+                            width="200"
+                            // src="https://www.bycom.pt/media/1505/404.gif"
+                            src="https://res.cloudinary.com/ddjgvfkpq/image/upload/v1664499568/assets/404_b0xkvw.gif"
+                            alt="loading"
+                        />
+                        <Spinner />
+                        <br />
+                        <h3 className="fw-500">Publishing Your Class</h3>
+                    </>
+                )}
+                <Button variant={"ghost"} className="text-purple-1">
+                    Go Back
+                </Button>
             </Flex>
         </Box>
     );

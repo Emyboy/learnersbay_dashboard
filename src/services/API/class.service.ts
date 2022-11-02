@@ -25,10 +25,12 @@ export class ClassService {
     }
 
     static async updateClassData(class_id: number, newData: any) {
-        const res = await API(`/course/${class_id}`, true, {
+        const res = await API(`/course/update/${class_id}`, true, {
             method: "PUT",
             data: {
-                data: newData,
+                data: {
+                    ...newData,
+                },
             },
         });
         return res;

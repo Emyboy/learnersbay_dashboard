@@ -15,7 +15,7 @@ import ThumbnailUpload from "../../components/Classes/CreateClass/ThumbnailUploa
 import React, { useEffect, useState } from "react";
 
 export default function Create() {
-    const [steps, setSteps] = useState(2);
+    const [steps, setSteps] = useState(0);
     const [loading, setLoading] = useState(false);
     const [allowNext, setAllowNext] = useState(false);
     const [placeholderData, setPlaceholderData] = useState<any>({
@@ -36,6 +36,7 @@ export default function Create() {
         setPlaceholderData({ ...placeholderData, ...newData });
     };
 
+    console.log('RE-RENDER')
     // console.log("CLASS DATA --", {
     //     placeholderData,
     //     thumbnail_file,
@@ -113,7 +114,7 @@ export default function Create() {
                                         thumbnail_url="https://gskpro.com/etc/designs/zg-placeholders/video.png"
                                         file={null}
                                         ready={(e) => setVideoFile(e)}
-                                        accept="video/mp4"
+                                        accept="video/mp4, video/mkv"
                                         previewType={PreviewTypes.video}
                                     />
                                 </StepContainer>,
