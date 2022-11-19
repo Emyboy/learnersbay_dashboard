@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { FormsProps } from "./CreateClass.interface";
 import { class_difficulty } from "../../../CONSTANTS";
 
-
 export function BasicInfo({ ready }: FormsProps) {
     const { class_categories, class_sub_categories, class_languages } =
         useSelector((state: MainAppStore) => state.options);
@@ -34,7 +33,7 @@ export function BasicInfo({ ready }: FormsProps) {
     useEffect(() => {
         (async () => {
             await getAllClassOptions();
-        })()
+        })();
     }, []);
 
     useEffect(() => {
@@ -142,16 +141,25 @@ export function BasicInfo({ ready }: FormsProps) {
                     Class Difficulty Level*
                 </label>
 
-
-                <select placeholder="Select option" onChange={(e) => setClassData({ difficulty_level: JSON.parse(e.target.value) })}>
-                    <option>Select One</option>
-                    {
-                        class_difficulty.map((val) => {
-                            return <option key={`level-${val.value}`}
-                                value={JSON.stringify(val)}>{val.value}</option>;
-                        })
+                <select
+                    placeholder="Select option"
+                    onChange={(e) =>console.log(e.target.value)
+                        // setClassData({
+                        //     difficulty_level: JSON.parse(e.target.value),
+                        // })
                     }
-
+                >
+                    <option>Select One</option>
+                    {class_difficulty.map((val) => {
+                        return (
+                            <option
+                                key={`level-${val.value}`}
+                                value={JSON.stringify(val)}
+                            >
+                                {val.value}
+                            </option>
+                        );
+                    })}
                 </select>
             </div>
             <div className="col-md-6">
@@ -166,15 +174,23 @@ export function BasicInfo({ ready }: FormsProps) {
                     }))}
                     onChange={(e) => setClassData({ language: e?.value })}
                 /> */}
-                <select placeholder="Select option" onChange={(e) => setClassData({ language: JSON.parse(e.target.value) })}>
-                    <option>Select One</option>
-                    {
-                        class_languages.map((val) => {
-                            return <option key={`language-${val.id}`}
-                                           value={JSON.stringify(val)}>{val.attributes.name}</option>;
-                        })
+                <select
+                    placeholder="Select option"
+                    onChange={(e) =>
+                        setClassData({ language: JSON.parse(e.target.value) })
                     }
-
+                >
+                    <option>Select One</option>
+                    {class_languages.map((val) => {
+                        return (
+                            <option
+                                key={`language-${val.id}`}
+                                value={JSON.stringify(val)}
+                            >
+                                {val.attributes.name}
+                            </option>
+                        );
+                    })}
                 </select>
             </div>
         </form>
